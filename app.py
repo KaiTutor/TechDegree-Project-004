@@ -102,7 +102,15 @@ def add_csv():
 		session.commit()
 
 def backup_csv():
-	#backup .db into .csv
+	inspector = inspect(engine)
+	table_names = inspector.get_table_names()
+
+	for table in table_names:
+		df = pd.read_sql_table(table, engine)
+		file_name = f"backup_{table}.csv"
+
+		df.to_csv(file_name, index=False)
+		print(f"Exported {table} to {file_name}")
 
 
 def view_product():
@@ -186,8 +194,7 @@ def app():
 
 
 		elif choice == 'B':
-
-			backup_csv():
+			backup_csv()
 			input('Press enter to return to menu.')
 			
 
