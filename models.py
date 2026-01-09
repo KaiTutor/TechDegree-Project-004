@@ -11,7 +11,7 @@ Base = declarative_base()
 
 # create a model
 class Product(Base):
-	__tablename__ = 'Books'
+	__tablename__ = 'Products'
 
 	product_id = Column(Integer, primary_key=True)
 	product_name = Column('Name', String)
